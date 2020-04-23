@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "308194375385",
+    "firebase_url": "https://flashchat-id101.firebaseio.com",
+    "project_id": "flashchat-id101",
+    "storage_bucket": "flashchat-id101.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308194375385:android:aae9f1e2c58d248730f0c8",
+        "android_client_info": {
+          "package_name": "com.salvadorchaos.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308194375385-q3fhdvb8b5ba24uuprvlqq5p0koh79l4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcbV7knURRUi1K-5oRjg0L8U4TLh76KLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308194375385-q3fhdvb8b5ba24uuprvlqq5p0koh79l4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
