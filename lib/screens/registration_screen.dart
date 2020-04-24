@@ -14,6 +14,7 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
+  String name;
   String email;
   String password;
   bool showSpinner = false;
@@ -61,6 +62,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 48.0,
               ),
               TextField(
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  //Do something with the user input.
+                  name = value;
+                },
+                decoration:
+                    kTextFieldDecoration.copyWith(hintText: 'Enter your Name'),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              TextField(
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -104,10 +120,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     showSpinner = true;
                   });
                   try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
+                    final newUser = _auth.createUserWithEmailAndPassword(
                       email: email,
                       password: password,
                     );
+                    await newUser.then((value) async {
+                      var userUpdateInfo = UserUpdateInfo();
+                      userUpdateInfo.displayName = name;
+                      await value.user.updateProfile(userUpdateInfo);
+                      await value.user.reload();
+                      //print('displayName is ${userUpdateInfo.displayName}');
+                      //print('newUser is ${newUser}');
+                    });
                     if (newUser != null) {
                       Navigator.pushNamed(context, ChatScreen.id);
                     }

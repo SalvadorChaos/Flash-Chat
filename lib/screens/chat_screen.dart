@@ -69,7 +69,9 @@ class _ChatScreenState extends State<ChatScreen> {
                 );
               }),
         ],
-        title: Text('⚡️Chat'),
+        title: Center(
+          child: Text('⚡️Chat'),
+        ),
         backgroundColor: Colors.black,
         brightness: Brightness.dark,
       ),
@@ -99,6 +101,9 @@ class _ChatScreenState extends State<ChatScreen> {
                       //Implement send functionality.
                       messageTextController.clear();
                       _firestore.collection('messages').add({
+                        'name': loggedInUser.displayName != null
+                            ? loggedInUser.displayName
+                            : loggedInUser.email,
                         'text': messageText,
                         'sender': loggedInUser.email,
                         'timestamp': DateTime.now().toIso8601String(),
@@ -138,6 +143,7 @@ class MessageStream extends StatelessWidget {
           final messages = snapshot.data.documents.reversed;
           List<MessageBubble> messageBubbles = [];
           for (var message in messages) {
+            final senderName = message.data['name'];
             final messageText = message.data['text'];
             final messageSender = message.data['sender'];
 
@@ -149,7 +155,7 @@ class MessageStream extends StatelessWidget {
 
             final messageBubble = MessageBubble(
               text: messageText,
-              sender: messageSender,
+              sender: senderName,
               isMe: currentUser == messageSender,
             );
             messageBubbles.add(messageBubble);
